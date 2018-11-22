@@ -1,0 +1,16 @@
+环境：Ubuntu 12.04
+问题：没有连网，不能进行apt-get进行更新
+解决方案：
+	1. 查看是否能联网，可以在终端中打开（ctrl+alt+T），执行ping www.baidu.com， 查看是否能ping 通
+		a. 如果没有看到网络的标志，则首先编辑/etc/NetworkManager/NetworkManager.conf，把里边的managed=false改成managed=true 注销后应该可以看见联网的标志了
+		b. 如果不能ping通，看问题，若是没有连网，则
+		关机，在虚拟机的设置中选择NAT模式进行连接，然后开机；
+		再执行下面的操作：
+		sudo /etc/network/interfaces把这个interfacers先备份cp，然后删了rm，
+		然后sudo /etc/init.d/networking restart 和sudo /etc/init.d/network-manager restart 搞定
+		可以看见可以联网了
+	2. 不能执行sudo apt-get update命令，或是实在太慢了
+	  则是时候该换下外网的服务器了（不知道这么理解对不对）
+	  在设置（右上角）中选择软件和更新最佳服务器，然后进行安装一些必要的操作。
+	  再进行sudo apt-get update,它是预下载一些软件包的命令
+    就可以下载安装各种软件了，可能还要补充下载
